@@ -1,0 +1,24 @@
+@font-face {
+    font-family:'MyFont-0';
+    src: url("My-Font.otf") format('opentype');
+}
+@font-face {
+    font-family:'MyFont-1';
+    src: url("My-Font-1.otf") format('opentype');
+}
+@font-face {
+    font-family:'MyFont-3';
+    src: url("My-Font-1.otf") format('opentype');
+}
+@font-face {
+    font-family:'MyFont-4';
+    src: url("My-Font.otf") format('opentype');
+}
+@font-face {
+    font-family:'MyFont-5';
+    src: url("My-Font-1.otf") format('opentype');
+}
+@font-face {
+    font-family:'MyFont-6';
+    src: url("My-Font-1.otf") format('opentype');
+}
