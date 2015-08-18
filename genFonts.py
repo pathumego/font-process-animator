@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os, sys
 
 def genFonts(fileName, outputDir):
@@ -15,6 +13,7 @@ def genFonts(fileName, outputDir):
             outputFileName =  str(count) + fileName
             os.system('cp ' + fileName + ' ' + outputDir +
             outputFileName)
+            count = count + 1
 
         os.sytem('rm ' + outputDir +'gitlogtmp')
 
