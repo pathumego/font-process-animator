@@ -4,17 +4,20 @@ import os, sys
 
 def genFonts(fileName, outputDir):
     os.system('mkdir -p ' + outputDir)
-    os.system('git log --pretty=%h ' + fileName + ' > log')
-    commits = open('log').read().splitlines()
-    print(commits)
-    
+    os.system('git log --pretty=%h ' + fileName + ' > ' + outputDir + 'gitlogtmp')
+    commits = open(outputDir + 'gitlogtmp').read().splitlines()
+    ##print(commits)
+
+    count = 1
     try:
         for commitHash in commits:
             os.system('git checkout ' + commitHash)
-            outputFileName = str('%05d' + fileName)
+            outputFileName =  str(count) + fileName
             os.system('cp ' + fileName + ' ' + outputDir +
             outputFileName)
-            os.sytem('rm log')
+
+        os.sytem('rm ' + outputDir +'gitlogtmp')
+
     except:
         print("log file read error or no git commits...")
 
