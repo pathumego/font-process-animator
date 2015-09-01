@@ -5,12 +5,12 @@ def genFonts(fileName, outputDir):
     os.system('git log --pretty=%h ' + fileName + ' > ' + outputDir + 'gitlogtmp')
     commits = open(outputDir + 'gitlogtmp').read().splitlines()
     ##print(commits)
-
+    fileSep=fileName.split('.')
     count = 1
     try:
         for commitHash in commits:
             os.system('git checkout ' + commitHash)
-            outputFileName =  fileName+"-"+str(count)
+            outputFileName =  fileSep[0]+"-"+str(count)+fileSep[1]
             os.system('cp ' + fileName + ' ' + outputDir +
             outputFileName)
             count = count + 1
