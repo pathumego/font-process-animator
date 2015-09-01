@@ -10,7 +10,7 @@ def genFonts(fileName, outputDir):
     try:
         for commitHash in commits:
             os.system('git checkout ' + commitHash)
-            outputFileName =  fileSep[0]+"-"+str(count)+fileSep[1]
+            outputFileName =  fileSep[0]+"-"+str(count)+"."+fileSep[1]
             os.system('cp ' + fileName + ' ' + outputDir +
             outputFileName)
             count = count + 1
