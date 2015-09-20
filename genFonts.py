@@ -1,27 +1,39 @@
 import os, sys
 
-def genFonts(fileName, outputDir):
-    os.system('mkdir -p ' + outputDir)
-    os.system('git log --pretty=%h ' + fileName + ' > ' + outputDir + 'gitlogtmp')
-    commits = open(outputDir + 'gitlogtmp').read().splitlines()
-    ##print(commits)
-    fileSep=fileName.split('.')
-    count = 1
-    try:
-        for commitHash in commits:
-            os.system('git checkout ' + commitHash)
-            outputFileName =  fileSep[0]+"-"+str(count)+"."+fileSep[1]
-            os.system('cp ' + fileName + ' ' + outputDir +
-            outputFileName)
-            count = count + 1
+prefix = 1
 
-        os.sytem('rm ' + outputDir +'gitlogtmp')
+def cpFile( fileName, fileDir ):
+    os.system( 'cp ' + fileDir + fileName + ' ' + 'temp/' + str( prefix ) + '_' + fileName )
+    prefix =+ 1
 
-    except:
-        print("log file read error or no git commits...")
+def rollCommits( fileName, fileDir, gitHash ):
+    os.system( 'git checkout ' + hashNum )
 
-def main(argv):
-    genFonts(argv[1], argv[2])
+def genGitLog( fileName, fileDir ):
+    os.system( 'mkdir -p temp' )
+    os.system( 'git log --pretty=%h ' + fileDir + fileName + ' > temp/gitLog' )
+
+def gitLogToArray( logDir ):
+    hashArray = open( 'temp/gitLog' ).read().splitlines()
+    return hashArray
+
+def process( fileName, fileDir ):
+    genGitLog( fileName, fileDir )
+    hashArray = gitLogToArray()
+    for hashNum in hashArray:
+        rollCommits( fileName, fileDir )
+        cpFile( fileName, fileDir )
+
+def main( argv ):
+    fileName = fileDir = ""
+    if '-f' in argv:
+        fileName = argv[ argv.index( '-f' ) + 1 ]
+        if '-i' in argv:
+            fileDir = argv[ argv.index( '-i' ) + 1 ]
+        else:
+            print( "no file location is given." )
+    else:
+        print( "no input file is given." )
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main( sys.argv )
