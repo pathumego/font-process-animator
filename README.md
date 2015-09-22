@@ -3,5 +3,5 @@
 Test:
 
 ```
-$ python3 genFonts.py fontName.otf outputDirectory
+$ python3 gen.py -f AyannaNarrowSinhala-ExtraBold.otf -i ayanna-narrow/tests/fonts/
 ```
