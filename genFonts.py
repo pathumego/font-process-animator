@@ -4,7 +4,7 @@ count = 1
 
 def cpFile( fileName, fileDir ):
     global count
-    os.system( 'cp ' + fileDir + fileName + ' ' + 'temp/' + str( count ) + '_' + fileName )
+    os.system( 'cp ' + fileDir + fileName + ' ' + 'fonts/' + str( count ) + '_' + fileName )
     count += 1
 
 def rollCommits( fileName, fileDir, gitHash ):
@@ -12,7 +12,6 @@ def rollCommits( fileName, fileDir, gitHash ):
     os.system( 'cd - > /dev/null' )
 
 def genGitLog( fileName, fileDir ):
-    os.system( 'mkdir -p temp' )
     os.system( 'cd ' + fileDir + '&& git log --pretty=%h ' + fileName + ' > gitLog' )
     os.system( 'cd - > /dev/null' )
 
