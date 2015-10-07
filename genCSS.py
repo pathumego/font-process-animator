@@ -1,21 +1,23 @@
 import os
 
 def getFileListToArray():
-    elements = [x for x in os.listdir(directory_path) if path.isfile(directory_path+os.sep+x)]
+    elements = ( os.listdir('fonts/') )
+
+    for element in elements:
+        if element.endswith( '.css' ) or element.endswith( 'Log' ):
+            elements.remove( element )
+
+    elements.sort()
     return elements
     
-def writeToFile( fontFamily, fontName, fontFormat ):
+def writeToFile( fontName, fontFormat ):
     CSSFile = open( 'fonts/fonts.css', 'ab+' )
     elements = getFileListToArray()
 
     for i in elements:
-        if i is 'gitLog' or i is 'fonts.css':
-            continue
-
-        else:
-            CSSFile.write( '@font-face {\n' )
-            CSSFile.write( '    font-family:\'' + i + "\';\n" )
-            CSSFile.write( '    src:url(\"' + fontName + "\") format(\'" + fontFormat + "\');\n"  )
-            CSSFile.write( '}\n\n' )
+        CSSFile.write( bytes( "@font-face {\n", 'UTF-8' ) )
+        CSSFile.write( bytes( '    font-family:\'' + i[ :-4 ] + "\';\n", 'UTF-8' ) )
+        CSSFile.write( bytes( '    src:url(\"' + fontName + "\") format(\'" + fontFormat + "\');\n", 'UTF-8'  ) )
+        CSSFile.write( bytes( '}\n\n', 'UTF-8' ) )
 
     CSSFile.close()
